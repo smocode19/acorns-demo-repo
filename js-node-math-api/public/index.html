@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MATH MORE MATH</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <style>
+      body {
+          background-color: rgb(111, 178, 111);
+      }
+      .container {
+          background-color: white;
+          border-radius: 5px;
+          padding: 20px;
+          margin-top: 20px;
+          box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+      }
+      .form-group {
+          margin-bottom: 20px;
+      }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+</head>
+<body>
+  <div class="container">
+    <h1 style="margin-top: 10px;">Math More Math</h1>
+    <p>Enter two numbers and click the button to call the API endpoint.</p>
+    <div class="form-group">
+      <h3 style="text-align: center;">Add</h3>
+      <label for="number1">Number 1</label>
+      <input type="number" class="form-control" id="number1" placeholder="Enter number 1">
+      <label for="number1b" style="margin-top: 10px;">Number 2</label>
+      <input type="number" class="form-control" id="number1b" placeholder="Enter number 1b">
+      <button id="add-button" class="btn btn-primary" style="margin-top: 15px; width: 100%;">Call Add API</button>
+      <div style=" display: flex; align-items: center; justify-content: center; padding: 10px;">
+        <span id="add-result" style="font-weight: bold; font-size: xx-large"></span>
+      </div>    
+    </div>
+    <div class="form-group">
+      <h3 style="text-align: center;">Pow</h3>
+      <label for="number2">Number 1</label>
+      <input type="number" class="form-control" id="number2" placeholder="Enter number 2">
+      <label for="number2b" style="margin-top: 10px;">Number 2</label>
+      <input type="number" class="form-control" id="number2b" placeholder="Enter number 2b">
+      <button id="pow-button" class="btn btn-primary" style="margin-top: 15px; width: 100%;">Call Pow API</button>
+      <div style=" display: flex; align-items: center; justify-content: center; padding: 10px;">
+        <span id="pow-result" style="font-weight: bold; font-size: xx-large"></span>
+      </div>    
+    </div>
+  </div>
+
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+  <script>
+      document.getElementById('add-button').addEventListener('click', function(e) {
+          e.preventDefault();
+
+          var number1 = document.getElementById('number1').value;
+          var number1b = document.getElementById('number1b').value;
+
+          fetch(`/add?a=${number1}&b=${number1b}`)
+            .then(response => response.text())
+            .then(data => {
+              console.log('Add result:', data);
+              document.getElementById('add-result').textContent = data;
+            });
+      });
+
+      document.getElementById('pow-button').addEventListener('click', function(e) {
+          e.preventDefault();
+
+          var number2 = document.getElementById('number2').value;
+          var number2b = document.getElementById('number2b').value;
+
+          fetch(`/pow?a=${number2}&b=${number2b}`)
+            .then(response => response.text())
+            .then(data => {
+              console.log('Pow result:', data);
+              document.getElementById('pow-result').textContent = data;
+            });
+      });
+  </script>
+</body>
+</html>
